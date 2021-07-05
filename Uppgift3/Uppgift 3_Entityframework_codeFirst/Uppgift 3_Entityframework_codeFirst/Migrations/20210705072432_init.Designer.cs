@@ -10,8 +10,8 @@ using Uppgift_3_Entityframework_codeFirst.Data;
 namespace Uppgift_3_Entityframework_codeFirst.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210702135059_key namenchange")]
-    partial class keynamenchange
+    [Migration("20210705072432_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,12 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
                     b.Property<int>("GuestsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReservationsID")
+                    b.Property<int>("ReservationsReservationNr")
                         .HasColumnType("int");
 
-                    b.HasKey("GuestsID", "ReservationsID");
+                    b.HasKey("GuestsID", "ReservationsReservationNr");
 
-                    b.HasIndex("ReservationsID");
+                    b.HasIndex("ReservationsReservationNr");
 
                     b.ToTable("GuestReservation");
                 });
@@ -65,7 +65,7 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
 
             modelBuilder.Entity("Uppgift_3_Entityframework_codeFirst.Models.Reservation", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ReservationNr")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -85,7 +85,7 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("ReservationNr");
 
                     b.HasIndex("RoomId");
 
@@ -120,7 +120,7 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
 
                     b.HasOne("Uppgift_3_Entityframework_codeFirst.Models.Reservation", null)
                         .WithMany()
-                        .HasForeignKey("ReservationsID")
+                        .HasForeignKey("ReservationsReservationNr")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
