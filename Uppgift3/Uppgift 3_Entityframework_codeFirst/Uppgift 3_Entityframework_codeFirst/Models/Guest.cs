@@ -10,11 +10,6 @@ namespace Uppgift_3_Entityframework_codeFirst.Models
 {
     public class Guest
     {
-        public Guest()
-        {
-            this.Reservations = new List<Reservation>();
-        }
-
         public int ID {get;set;}
         [Required]
         [Column(TypeName = "nvarchar(50)")]
@@ -25,11 +20,5 @@ namespace Uppgift_3_Entityframework_codeFirst.Models
         [Required]       
         [Column(TypeName = "varchar(50)")]
         public string Email { get; set; }
-
-        [ForeignKey("Reservation")]
-        public int ReservationNr { get; set; }
-        public List< Reservation> Reservations { get; set; }
-
-
     }
 }

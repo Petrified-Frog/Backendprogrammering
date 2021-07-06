@@ -13,6 +13,8 @@ namespace Uppgift_3_Entityframework_codeFirst.Data
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<GuestReservation> GuestReservations { get; set; }
+
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +24,11 @@ namespace Uppgift_3_Entityframework_codeFirst.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<GuestReservation>(entity => 
+            {
+                entity.HasKey(e => new { e.ReservationNr, e.GuestID }).HasName("PK_GuestReservat");
+            });
         }
     }
 }

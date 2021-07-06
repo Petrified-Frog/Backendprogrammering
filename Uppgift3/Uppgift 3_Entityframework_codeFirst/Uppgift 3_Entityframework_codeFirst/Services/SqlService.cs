@@ -50,27 +50,45 @@ namespace Uppgift_3_Entityframework_codeFirst.Services
                 CheckoutDate = checkoutDate,
                 PaymentMethod = payment,
                 RoomId = room.ID,
-                GuestId = guest.ID
+                //GuestId = guest.ID
             };
 
             _context.Reservations.Add(newReservation);
             _context.SaveChanges();
 
-            return newReservation;
-
-            //var guestID = _context.Guests.Find(guest.Email).ID;
-            //var reservationID = newReservation.ReservationNr;            
+            return newReservation;           
         }
 
-        public void LinkGuest(Guest guest, Reservation reservation)
+        public void MakeGuestReservation(Guest guest, Reservation reservation)
         {
-            GetGuestByEmail(guest.Email).ReservationNr = reservation.ReservationNr;            
+            var newGuestReservation = new GuestReservation
+            {
+                GuestID = guest.ID,
+                ReservationNr = reservation.ReservationNr
+            };
+            _context.GuestReservations.Add(newGuestReservation);
             _context.SaveChanges();
         }
-
+       
         public Guest GetGuestByEmail(string email)
         {
             return _context.Guests.Where(x => x.Email == email).FirstOrDefault();
+        }
+
+        public List<Reservation> GetAllReservations()
+        {
+            return _context.Reservations.ToList();                   
+        }
+
+        public Guest GetGuestByReservationNr(int reservationNr)
+        {
+            var guestID = ReservationNrToGuestID(reservationNr);
+            return _context.Guests.Where(x => x.ID == guestID).FirstOrDefault();
+        }
+
+        public int ReservationNrToGuestID(int resNr)
+        {
+            return _context.GuestReservations.Where(x => x.ReservationNr == resNr).FirstOrDefault().GuestID;
         }
     }
 }

@@ -10,8 +10,8 @@ using Uppgift_3_Entityframework_codeFirst.Data;
 namespace Uppgift_3_Entityframework_codeFirst.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210705072432_init")]
-    partial class init
+    [Migration("20210706075459_manual guestreservation")]
+    partial class manualguestreservation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,20 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("Uppgift_3_Entityframework_codeFirst.Models.GuestReservation", b =>
+                {
+                    b.Property<int>("ReservationNr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GuestID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationNr", "GuestID")
+                        .HasName("PK_GuestReservat");
+
+                    b.ToTable("GuestReservations");
                 });
 
             modelBuilder.Entity("Uppgift_3_Entityframework_codeFirst.Models.Reservation", b =>

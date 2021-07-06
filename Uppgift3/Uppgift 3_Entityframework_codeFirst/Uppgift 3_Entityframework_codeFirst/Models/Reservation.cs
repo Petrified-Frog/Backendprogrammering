@@ -9,12 +9,7 @@ using System.Threading.Tasks;
 namespace Uppgift_3_Entityframework_codeFirst.Models
 {
     public class Reservation
-    {
-        public Reservation()
-        {
-            this.Guests = new List<Guest>();
-        }
-
+    {       
         public enum paymentMethods { cash, card, blood};
 
         [Key]
@@ -35,13 +30,5 @@ namespace Uppgift_3_Entityframework_codeFirst.Models
         public int RoomId { get; set; }
         public Room Room { get; set; }
 
-
-      
-        [Required]
-        [ForeignKey("Guest")]
-        public int GuestId { get; set; }
-        public List<Guest> Guests { get; set; }
-
-        
     }
 }

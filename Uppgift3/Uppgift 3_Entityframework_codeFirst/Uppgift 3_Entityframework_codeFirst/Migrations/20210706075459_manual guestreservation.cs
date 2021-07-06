@@ -3,10 +3,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Uppgift_3_Entityframework_codeFirst.Migrations
 {
-    public partial class init : Migration
+    public partial class manualguestreservation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "GuestReservations",
+                columns: table => new
+                {
+                    GuestID = table.Column<int>(type: "int", nullable: false),
+                    ReservationNr = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuestReservat", x => new { x.ReservationNr, x.GuestID });
+                });
+
             migrationBuilder.CreateTable(
                 name: "Guests",
                 columns: table => new
@@ -99,6 +111,9 @@ namespace Uppgift_3_Entityframework_codeFirst.Migrations
         {
             migrationBuilder.DropTable(
                 name: "GuestReservation");
+
+            migrationBuilder.DropTable(
+                name: "GuestReservations");
 
             migrationBuilder.DropTable(
                 name: "Guests");
