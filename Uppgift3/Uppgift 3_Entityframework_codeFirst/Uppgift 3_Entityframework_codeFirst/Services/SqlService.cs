@@ -90,5 +90,24 @@ namespace Uppgift_3_Entityframework_codeFirst.Services
         {
             return _context.GuestReservations.Where(x => x.ReservationNr == resNr).FirstOrDefault().GuestID;
         }
+
+        public void UpdateReservation(Reservation reservation)
+        {
+            var uReservation = _context.Reservations.Where(x => x.ReservationNr == reservation.ReservationNr).FirstOrDefault();
+            //uReservation = reservation;
+            uReservation.CheckinDate = reservation.CheckinDate;
+            uReservation.CheckoutDate = reservation.CheckoutDate;
+            uReservation.PaymentMethod = reservation.PaymentMethod;            
+            _context.SaveChanges();
+        }
+
+        public void DeleteReservation(int nr)
+        {
+           Reservation toDelete =  _context.Reservations.Where(x => x.ReservationNr == nr).FirstOrDefault();
+            toDelete.CheckinDate = DateTime.MinValue;
+            toDelete.CheckoutDate = DateTime.MinValue;
+            
+            _context.SaveChanges();
+        }
     }
 }
