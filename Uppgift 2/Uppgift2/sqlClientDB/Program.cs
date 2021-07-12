@@ -203,19 +203,17 @@ namespace sqlClientDB
                 cmd.CommandText = $"SELECT RoomNr FROM Reservation WHERE ReservationNr={cancelNumber}";
                 var roomId = (Int16)cmd.ExecuteScalar();
 
-                cmd.CommandText =  $"DELETE FROM Reservation WHERE ReservationNr={cancelNumber}";
-                cmd.ExecuteNonQuery();
-
                 cmd.CommandText = $"DELETE FROM PartyReservation WHERE ReservationNr={cancelNumber}";
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = $"DELETE FROM Guest WHERE ID={guestId}";
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = $"DELETE FROM Room WHERE RoomNr={roomId}";
+                cmd.CommandText = $"DELETE FROM Reservation WHERE ReservationNr={cancelNumber}";
                 cmd.ExecuteNonQuery();
 
-
+                cmd.CommandText = $"DELETE FROM Room WHERE RoomNr={roomId}";
+                cmd.ExecuteNonQuery();
             }
 
             Console.WriteLine($"Reservation Nr {cancelNumber} canceled.");
