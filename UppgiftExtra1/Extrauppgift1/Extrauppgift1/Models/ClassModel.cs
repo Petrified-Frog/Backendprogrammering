@@ -10,7 +10,7 @@ namespace Extrauppgift1.Models
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public List<int> pupilIds { get; set; }
     }
 }

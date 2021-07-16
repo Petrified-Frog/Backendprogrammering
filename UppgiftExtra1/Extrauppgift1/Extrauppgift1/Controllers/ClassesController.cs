@@ -28,7 +28,7 @@ namespace Extrauppgift1.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetClass(int id)
+        public IActionResult GetClass(string id)
         {
             var eclass = _mongo.Classes.Find(x => x.Id == id).FirstOrDefault();
             return new OkResult();
@@ -43,7 +43,7 @@ namespace Extrauppgift1.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateClass(int id, ClassModel model)
+        public IActionResult UpdateClass(string id, ClassModel model)
         {
             var mongoClass = new ClassModel() { pupilIds = model.pupilIds };
             _mongo.Classes.ReplaceOne(x => x.Id == id, mongoClass) ;
@@ -51,7 +51,7 @@ namespace Extrauppgift1.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteClass(int id)
+        public IActionResult DeleteClass(string id)
         {
             var mongoClass = _mongo.Classes.Find(x => x.Id == id).FirstOrDefault();
             _mongo.Classes.DeleteOne(x => x.Id == mongoClass.Id);

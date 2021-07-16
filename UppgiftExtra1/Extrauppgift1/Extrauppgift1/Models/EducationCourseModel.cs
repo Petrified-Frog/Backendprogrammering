@@ -8,11 +8,10 @@ namespace Extrauppgift1.Models
 {
     public class EducationCourseModel
     {
-        [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string CourseCode { get; set; }
-        [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string EducationCode { get; set; }
+
     }
+
+
 }
